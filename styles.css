@@ -989,7 +989,134 @@ body {
     height: 1px;
     background-color: var(--accent-gold);
 }
+/* Loyalty Systems Section */
+.loyalty {
+    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
 
+.loyalty-journey {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    padding: 60px 0;
+}
+
+.journey-path {
+    position: relative;
+}
+
+.journey-line {
+    position: absolute;
+    left: 40px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, 
+        rgba(251, 191, 36, 0) 0%,
+        rgba(251, 191, 36, 0.3) 10%,
+        rgba(251, 191, 36, 0.3) 90%,
+        rgba(251, 191, 36, 0) 100%);
+}
+
+.journey-node {
+    position: relative;
+    padding-left: 100px;
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateX(-40px);
+}
+
+.journey-node[data-visible="true"] {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.node-dot {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    width: 20px;
+    height: 20px;
+    background: var(--bg-primary);
+    border: 2px solid var(--accent-gold);
+    border-radius: 50%;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.journey-node:hover .node-dot {
+    background: var(--accent-gold);
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+}
+
+.node-icon {
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-gold);
+    z-index: 3;
+    background: rgba(251, 191, 36, 0.1);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.journey-node:hover .node-icon {
+    background: rgba(251, 191, 36, 0.2);
+    transform: scale(1.1);
+}
+
+.node-content {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.journey-node:hover .node-content {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(251, 191, 36, 0.3);
+    transform: translateX(8px);
+}
+
+.node-content h3 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: var(--accent-gold);
+}
+
+.node-content p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+/* Add connecting line animation */
+.journey-node::before {
+    content: '';
+    position: absolute;
+    left: 40px;
+    top: 52px;
+    bottom: -80px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent-gold), transparent);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.journey-node:last-child::before {
+    display: none;
+}
+
+.journey-node[data-visible="true"]::before {
+    opacity: 0.3;
+}
 /* Partnerships Section */
 .partnerships {
     background: var(--bg-primary);

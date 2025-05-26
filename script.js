@@ -1,6 +1,6 @@
 /**
- * Narratum.io - v3 Enhanced Interactive JavaScript - Final Version
- * Features: Fixed navigation, gentle moving stars, meditative sound, custom dropdown
+ * Narratum.io - v3 Enhanced Interactive JavaScript - Final Fixed Version
+ * Features: Fixed navigation, gentle moving stars, meditative sound, custom dropdown, gold line fix
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,6 +26,7 @@ function initializeApp() {
         initializeMouseGlow();
         initializeDropdown();
         initializeSubtleHighlighting();
+        initializeGoldLine();
     }, 1000);
 }
 
@@ -110,6 +111,25 @@ function initializeStarField() {
     
     // Continue creating stars
     setInterval(createStar, 2000);
+}
+
+// Gold Line - Fixed to not show in hero
+function initializeGoldLine() {
+    const goldLine = document.querySelector('.gold-line');
+    const heroHeight = window.innerHeight;
+    
+    if (!goldLine) return;
+    
+    // Initially hide gold line
+    goldLine.classList.remove('visible');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > heroHeight - 100) {
+            goldLine.classList.add('visible');
+        } else {
+            goldLine.classList.remove('visible');
+        }
+    });
 }
 
 // Mouse Glow Effect
@@ -402,22 +422,6 @@ function initializeParallax() {
                 arc.style.transform = `translateY(${distanceFromTop * 0.1}px)`;
             }
         });
-        
-        // Parallax for gold line
-        const goldLine = document.querySelector('.gold-line');
-        if (goldLine) {
-            const lineHeight = window.innerHeight;
-            const totalHeight = document.body.scrollHeight;
-            const scrollPercent = scrollY / (totalHeight - lineHeight);
-            const gradientPosition = Math.min(100, Math.max(0, scrollPercent * 100));
-            
-            goldLine.style.background = `linear-gradient(to bottom, 
-                rgba(251, 191, 36, 0),
-                rgba(251, 191, 36, 0.3) ${gradientPosition - 10}%,
-                rgba(251, 191, 36, 0.5) ${gradientPosition}%,
-                rgba(251, 191, 36, 0.3) ${gradientPosition + 10}%,
-                rgba(251, 191, 36, 0))`;
-        }
     });
 }
 

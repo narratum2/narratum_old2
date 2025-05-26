@@ -1,6 +1,6 @@
 /**
- * Narratum.io - v3 Enhanced Interactive JavaScript
- * Features: Fixed navigation, gentle moving stars, meditative sound
+ * Narratum.io - v3 Enhanced Interactive JavaScript - Final Version
+ * Features: Fixed navigation, gentle moving stars, meditative sound, custom dropdown
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,6 +23,9 @@ function initializeApp() {
         initializeConstellationBackground();
         initializeTextHighlighting();
         initializeAnchorMenu();
+        initializeMouseGlow();
+        initializeDropdown();
+        initializeSubtleHighlighting();
     }, 1000);
 }
 
@@ -107,6 +110,102 @@ function initializeStarField() {
     
     // Continue creating stars
     setInterval(createStar, 2000);
+}
+
+// Mouse Glow Effect
+function initializeMouseGlow() {
+    const mouseGlow = document.querySelector('.mouse-glow');
+    if (!mouseGlow) return;
+    
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Show glow on interactive elements
+        const interactive = e.target.closest('.partnership-category, .capability-block, .journey-node, .symbol-item');
+        if (interactive) {
+            mouseGlow.classList.add('active');
+        } else {
+            mouseGlow.classList.remove('active');
+        }
+    });
+
+    // Direct positioning for immediate response
+    function animateGlow() {
+        mouseGlow.style.left = mouseX + 'px';
+        mouseGlow.style.top = mouseY + 'px';
+        mouseGlow.style.transform = 'translate(-50%, -50%)';
+        
+        requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+}
+
+// Custom Dropdown
+function initializeDropdown() {
+    const dropdown = document.getElementById('sectorDropdown');
+    if (!dropdown) return;
+    
+    const select = dropdown.querySelector('.dropdown-select');
+    const options = dropdown.querySelectorAll('.dropdown-option');
+    
+    // Toggle dropdown
+    select.addEventListener('click', function(e) {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
+    });
+    
+    // Select option
+    options.forEach(option => {
+        option.addEventListener('click', function() {
+            const value = this.getAttribute('data-value');
+            const text = this.textContent;
+            
+            // Update select
+            select.innerHTML = text;
+            select.value = value;
+            
+            // Update visual state
+            options.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            // Close dropdown
+            dropdown.classList.remove('active');
+        });
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+}
+
+// Subtle word highlighting
+function initializeSubtleHighlighting() {
+    const highlightWords = document.querySelectorAll('.highlight-word');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const delay = Array.from(highlightWords).indexOf(entry.target) * 200;
+                setTimeout(() => {
+                    entry.target.classList.add('active');
+                }, delay);
+            }
+        });
+    }, {
+        threshold: 0.8,
+        rootMargin: '0px'
+    });
+
+    highlightWords.forEach(word => {
+        observer.observe(word);
+    });
 }
 
 // Fixed Navigation Dots
@@ -395,6 +494,7 @@ function initializeFormHandling() {
             submitButton.innerHTML = '<span class="button-text">Sending...</span>';
             submitButton.disabled = true;
             
+            // Simulate form submission
             setTimeout(() => {
                 contactForm.innerHTML = `
                     <div class="form-success">
@@ -564,8 +664,6 @@ function initializeAudioToggle() {
         draw();
     }
 }
-
-// Signal Particles Background (Removed - replaced with gentle stars)
 
 // Color Mood Switcher
 function initializeColorMoodSwitcher() {

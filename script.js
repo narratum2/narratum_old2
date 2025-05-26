@@ -656,7 +656,6 @@ function initializeInteractiveBackground() {
     });
 }
 
-
 // Loyalty Journey
 function initializeLoyaltyJourney() {
     // Simply observe the nodes for visibility animation
@@ -683,35 +682,6 @@ function initializeLoyaltyJourney() {
     journeyNodes.forEach(node => {
         observer.observe(node);
     });
-}
-                
-                // Create connecting line
-                const line = document.createElement('div');
-                line.classList.add('journey-connection');
-                line.style.position = 'absolute';
-                line.style.top = `${currentRect.top + currentRect.height / 2}px`;
-                line.style.left = `${currentRect.left + currentRect.width / 2}px`;
-                line.style.width = `${nextRect.left - currentRect.left}px`;
-                line.style.height = '2px';
-                line.style.background = 'var(--accent-gold)';
-                line.style.opacity = '0.3';
-                line.style.transformOrigin = 'left center';
-                line.style.transform = 'scaleX(0)';
-                line.style.transition = 'transform 1s ease';
-                
-                document.body.appendChild(line);
-                
-                // Animate line when nodes become visible
-                const observer = new IntersectionObserver((entries) => {
-                    if (entries[0].isIntersecting) {
-                        setTimeout(() => {
-                            line.style.transform = 'scaleX(1)';
-                        }, 500);
-                });
-                
-                observer.observe(node);
-            }
-        }
 }
 
 // Constellation Background for Hero Section

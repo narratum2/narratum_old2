@@ -707,7 +707,6 @@ function initializeLoyaltyJourney() {
                         setTimeout(() => {
                             line.style.transform = 'scaleX(1)';
                         }, 500);
-                    }
                 });
                 
                 observer.observe(node);

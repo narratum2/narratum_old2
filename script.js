@@ -656,19 +656,30 @@ function initializeInteractiveBackground() {
     });
 }
 
+
 // Loyalty Journey
 function initializeLoyaltyJourney() {
-    // Add connecting lines between nodes
+    // Simply observe the nodes for visibility animation
     const journeyNodes = document.querySelectorAll('.journey-node');
     
-    journeyNodes.forEach((node, index) => {
-        if (index < journeyNodes.length - 1) {
-            const currentDot = node.querySelector('.node-dot');
-            const nextDot = journeyNodes[index + 1].querySelector('.node-dot');
-            
-            if (currentDot && nextDot) {
-                const currentRect = currentDot.getBoundingClientRect();
-                const nextRect = nextDot.getBoundingClientRect();
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.setAttribute('data-visible', 'true');
+                // Add staggered animation delay
+                const index = entry.target.getAttribute('data-node');
+                entry.target.style.transitionDelay = `${(index - 1) * 0.2}s`;
+            }
+        });
+    }, {
+        rootMargin: '0px',
+        threshold: 0.2
+    });
+    
+    journeyNodes.forEach(node => {
+        observer.observe(node);
+    });
+}
                 
                 // Create connecting line
                 const line = document.createElement('div');

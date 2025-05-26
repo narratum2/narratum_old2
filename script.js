@@ -1,11 +1,11 @@
 /**
- * Narratum.io - Perfect Hybrid Interactive JavaScript
- * Features interactive background, symbol interactions, sound elements, and text highlighting
+ * Narratum.io - v3 Enhanced Interactive JavaScript
+ * Features: Fixed navigation, gentle moving stars, meditative sound
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeLoader();
-    initializeSignalParticles();
+    initializeStarField();
     initializeApp();
 });
 
@@ -31,7 +31,6 @@ function initializeLoader() {
     const loader = document.querySelector('.loading-screen');
     
     if (loader) {
-        // Simulate loading time for visual effect
         setTimeout(() => {
             loader.classList.add('hidden');
             setTimeout(() => {
@@ -41,37 +40,112 @@ function initializeLoader() {
     }
 }
 
-// Navigation Dots
+// Gentle Moving Star Field
+function initializeStarField() {
+    const starContainer = document.createElement('div');
+    starContainer.className = 'gentle-stars';
+    starContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+    `;
+    document.body.appendChild(starContainer);
+    
+    // Create gentle moving stars
+    const createStar = () => {
+        const star = document.createElement('div');
+        const size = Math.random() * 2 + 1; // 1-3px
+        const startX = Math.random() * window.innerWidth;
+        const duration = Math.random() * 20 + 30; // 30-50s
+        
+        star.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            background: rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3});
+            border-radius: 50%;
+            left: ${startX}px;
+            top: ${window.innerHeight + 10}px;
+            box-shadow: 0 0 ${size}px rgba(255, 255, 255, 0.5);
+        `;
+        
+        starContainer.appendChild(star);
+        
+        // Animate upward with slight horizontal drift
+        let progress = 0;
+        const horizontalDrift = (Math.random() - 0.5) * 100;
+        
+        const animateStar = () => {
+            progress += 1 / (duration * 60); // 60fps
+            
+            if (progress >= 1) {
+                star.remove();
+                return;
+            }
+            
+            const y = window.innerHeight * (1 - progress) - 10;
+            const x = startX + Math.sin(progress * Math.PI * 2) * horizontalDrift;
+            
+            star.style.transform = `translate(${x - startX}px, ${y - window.innerHeight}px)`;
+            star.style.opacity = Math.sin(progress * Math.PI) * 0.8;
+            
+            requestAnimationFrame(animateStar);
+        };
+        
+        animateStar();
+    };
+    
+    // Create initial stars
+    for (let i = 0; i < 20; i++) {
+        setTimeout(createStar, i * 200);
+    }
+    
+    // Continue creating stars
+    setInterval(createStar, 2000);
+}
+
+// Fixed Navigation Dots
 function initializeNavigation() {
     const sections = document.querySelectorAll('.section');
     const navDots = document.querySelectorAll('.nav-dot');
     
-    // Click event for navigation dots
+    // Enhanced click event for navigation dots
     navDots.forEach(dot => {
         dot.addEventListener('click', () => {
             const targetSection = dot.getAttribute('data-section');
-            const section = document.querySelector(`[data-section="${targetSection}"]`);
+            const section = document.getElementById(targetSection);
             
             if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
+                const offset = 0;
+                const targetPosition = section.offsetTop - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update active state
+                navDots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
             }
         });
     });
     
-    // Scroll event to update active dot
+    // Update active dot on scroll
     window.addEventListener('scroll', () => {
         let currentSection = '';
-        let closestDistance = Infinity;
-        const scrollPosition = window.scrollY + window.innerHeight / 3;
+        const scrollPosition = window.scrollY + window.innerHeight / 2;
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            const sectionMiddle = sectionTop + sectionHeight / 2;
-            const distance = Math.abs(scrollPosition - sectionMiddle);
             
-            if (distance < closestDistance) {
-                closestDistance = distance;
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 currentSection = section.getAttribute('data-section');
             }
         });
@@ -85,7 +159,7 @@ function initializeNavigation() {
     });
 }
 
-// Anchor Menu that appears when scrolling
+// Fixed Anchor Menu
 function initializeAnchorMenu() {
     const anchorMenu = document.querySelector('.anchor-menu');
     const sections = document.querySelectorAll('.section');
@@ -102,17 +176,13 @@ function initializeAnchorMenu() {
         
         // Update active anchor
         let currentSection = '';
-        let closestDistance = Infinity;
-        const scrollPosition = window.scrollY + window.innerHeight / 3;
+        const scrollPosition = window.scrollY + 100;
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            const sectionMiddle = sectionTop + sectionHeight / 2;
-            const distance = Math.abs(scrollPosition - sectionMiddle);
             
-            if (distance < closestDistance) {
-                closestDistance = distance;
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 currentSection = section.getAttribute('data-section');
             }
         });
@@ -126,19 +196,18 @@ function initializeAnchorMenu() {
         });
     });
     
-    // Enhanced click event for anchor links with smooth scrolling
+    // Fix anchor links to work properly
     const anchors = anchorMenu.querySelectorAll('.anchor-link');
     anchors.forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             e.preventDefault();
             const targetSection = anchor.getAttribute('data-section');
-            const section = document.querySelector(`#${targetSection}`);
+            const section = document.getElementById(targetSection);
             
             if (section) {
-                const offset = 0; // Adjust if you have a fixed header
+                const offset = 0;
                 const targetPosition = section.offsetTop - offset;
                 
-                // Smooth scroll with easing
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -165,7 +234,6 @@ function initializeObservers() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.setAttribute('data-visible', 'true');
-                // Add staggered animation delay
                 const index = entry.target.getAttribute('data-index');
                 entry.target.style.transitionDelay = `${(index - 1) * 0.2}s`;
             }
@@ -182,7 +250,6 @@ function initializeObservers() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.setAttribute('data-visible', 'true');
-                // Add staggered animation delay
                 const index = entry.target.getAttribute('data-node');
                 entry.target.style.transitionDelay = `${(index - 1) * 0.3}s`;
             }
@@ -261,23 +328,17 @@ function initializeSymbolInteractions() {
     
     symbols.forEach(symbol => {
         symbol.addEventListener('click', function() {
-            // Toggle active state
             const wasActive = this.classList.contains('active');
             
-            // Close all other symbols
             symbols.forEach(s => s.classList.remove('active'));
             
-            // Toggle current symbol
             if (!wasActive) {
                 this.classList.add('active');
-                
-                // Add magical particle effect
                 createMagicalParticles(this);
             }
         });
     });
     
-    // Close on click outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.symbol-item')) {
             symbols.forEach(s => s.classList.remove('active'));
@@ -295,13 +356,11 @@ function createMagicalParticles(symbolElement) {
         const particle = document.createElement('div');
         particle.classList.add('magical-particle');
         
-        // Random position around the symbol
         const angle = Math.random() * Math.PI * 2;
         const distance = 30 + Math.random() * 50;
         const x = centerX + Math.cos(angle) * distance;
         const y = centerY + Math.sin(angle) * distance;
         
-        // Set particle properties
         particle.style.left = `${x}px`;
         particle.style.top = `${y}px`;
         particle.style.backgroundColor = Math.random() > 0.5 ? 'var(--accent-gold)' : 'var(--accent-cyan)';
@@ -309,10 +368,8 @@ function createMagicalParticles(symbolElement) {
         particle.style.height = particle.style.width;
         particle.style.opacity = 0.1 + Math.random() * 0.4;
         
-        // Add to DOM
         document.body.appendChild(particle);
         
-        // Animate and remove
         setTimeout(() => {
             particle.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px) scale(0)`;
             particle.style.opacity = '0';
@@ -332,7 +389,6 @@ function initializeFormHandling() {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Simulate form submission
             const submitButton = contactForm.querySelector('.submit-button');
             const originalText = submitButton.innerHTML;
             
@@ -340,7 +396,6 @@ function initializeFormHandling() {
             submitButton.disabled = true;
             
             setTimeout(() => {
-                // Show success message
                 contactForm.innerHTML = `
                     <div class="form-success">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="success-icon">
@@ -356,14 +411,13 @@ function initializeFormHandling() {
     }
 }
 
-// Audio Toggle with Enhanced Sound
+// Enhanced Meditative Audio Toggle
 function initializeAudioToggle() {
     const audioToggle = document.querySelector('.audio-toggle');
     const soundVisualization = document.querySelector('.sound-visualization');
     let audioContext;
     let masterGain;
-    let oscillators = [];
-    let analyser;
+    let nodes = {};
     let animationFrame;
     
     if (audioToggle) {
@@ -371,44 +425,34 @@ function initializeAudioToggle() {
             const currentState = audioToggle.getAttribute('data-state');
             
             if (currentState === 'inactive') {
-                // Initialize audio context if not already created
                 if (!audioContext) {
                     audioContext = new (window.AudioContext || window.webkitAudioContext)();
                     masterGain = audioContext.createGain();
                     masterGain.gain.value = 0;
                     masterGain.connect(audioContext.destination);
                     
-                    // Create analyser for visualization
-                    analyser = audioContext.createAnalyser();
-                    analyser.fftSize = 32;
-                    masterGain.connect(analyser);
-                    
-                    // Create ambient sound
-                    createAmbientSound();
+                    createMeditativeSound();
                 }
                 
-                // Fade in
+                // Fade in slowly
                 masterGain.gain.cancelScheduledValues(audioContext.currentTime);
-                masterGain.gain.setValueAtTime(masterGain.gain.value, audioContext.currentTime);
-                masterGain.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 2);
+                masterGain.gain.setValueAtTime(0, audioContext.currentTime);
+                masterGain.gain.linearRampToValueAtTime(0.08, audioContext.currentTime + 3);
                 
                 audioToggle.setAttribute('data-state', 'active');
                 soundVisualization.classList.add('active');
                 
-                // Start visualization
                 visualizeAudio();
             } else {
-                // Fade out
                 if (audioContext && masterGain) {
                     masterGain.gain.cancelScheduledValues(audioContext.currentTime);
                     masterGain.gain.setValueAtTime(masterGain.gain.value, audioContext.currentTime);
-                    masterGain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 1);
+                    masterGain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 2);
                 }
                 
                 audioToggle.setAttribute('data-state', 'inactive');
                 soundVisualization.classList.remove('active');
                 
-                // Stop visualization
                 if (animationFrame) {
                     cancelAnimationFrame(animationFrame);
                 }
@@ -416,87 +460,102 @@ function initializeAudioToggle() {
         });
     }
     
-    function createAmbientSound() {
-        // Base frequencies for a calming ambient sound
-        const frequencies = [
-            55, // A1
-            110, // A2
-            220, // A3
-            330, // E4
-            440, // A4
-        ];
+    function createMeditativeSound() {
+        // Create a deep, meditative drone
+        const fundamentalFreq = 110; // A2
         
-        // Create oscillators for each frequency
-        frequencies.forEach(freq => {
-            // Main oscillator
-            const osc = audioContext.createOscillator();
-            osc.type = 'sine';
-            osc.frequency.value = freq;
-            
-            // Individual gain for this oscillator
-            const gain = audioContext.createGain();
-            gain.gain.value = 0.1 + Math.random() * 0.1;
-            
-            // Connect oscillator to its gain node
-            osc.connect(gain);
-            
-            // Connect gain to master gain
-            gain.connect(masterGain);
-            
-            // Start oscillator
-            osc.start();
-            
-            // Store oscillator for later reference
-            oscillators.push(osc);
-            
-            // Modulate the frequency slightly over time for organic feel
-            setInterval(() => {
-                const now = audioContext.currentTime;
-                osc.frequency.setValueAtTime(osc.frequency.value, now);
-                osc.frequency.linearRampToValueAtTime(
-                    freq * (0.99 + Math.random() * 0.02), 
-                    now + 2 + Math.random() * 3
-                );
-            }, 5000);
-        });
+        // Main drone oscillator
+        nodes.drone = audioContext.createOscillator();
+        nodes.drone.type = 'sine';
+        nodes.drone.frequency.value = fundamentalFreq;
         
-        // Add subtle noise for texture
-        const bufferSize = 2 * audioContext.sampleRate;
-        const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-        const output = noiseBuffer.getChannelData(0);
+        // Sub bass for depth
+        nodes.sub = audioContext.createOscillator();
+        nodes.sub.type = 'sine';
+        nodes.sub.frequency.value = fundamentalFreq / 2;
         
-        for (let i = 0; i < bufferSize; i++) {
-            output[i] = Math.random() * 2 - 1;
-        }
+        // Harmonic overtones for richness
+        nodes.fifth = audioContext.createOscillator();
+        nodes.fifth.type = 'sine';
+        nodes.fifth.frequency.value = fundamentalFreq * 1.5;
         
-        const noise = audioContext.createBufferSource();
-        noise.buffer = noiseBuffer;
-        noise.loop = true;
+        nodes.octave = audioContext.createOscillator();
+        nodes.octave.type = 'sine';
+        nodes.octave.frequency.value = fundamentalFreq * 2;
         
-        const noiseGain = audioContext.createGain();
-        noiseGain.gain.value = 0.01;
+        // Create gain nodes for each oscillator
+        nodes.droneGain = audioContext.createGain();
+        nodes.droneGain.gain.value = 0.4;
         
-        noise.connect(noiseGain);
-        noiseGain.connect(masterGain);
-        noise.start();
+        nodes.subGain = audioContext.createGain();
+        nodes.subGain.gain.value = 0.3;
+        
+        nodes.fifthGain = audioContext.createGain();
+        nodes.fifthGain.gain.value = 0.15;
+        
+        nodes.octaveGain = audioContext.createGain();
+        nodes.octaveGain.gain.value = 0.1;
+        
+        // Create filter for warmth
+        nodes.filter = audioContext.createBiquadFilter();
+        nodes.filter.type = 'lowpass';
+        nodes.filter.frequency.value = 800;
+        nodes.filter.Q.value = 0.5;
+        
+        // Connect everything
+        nodes.drone.connect(nodes.droneGain);
+        nodes.sub.connect(nodes.subGain);
+        nodes.fifth.connect(nodes.fifthGain);
+        nodes.octave.connect(nodes.octaveGain);
+        
+        nodes.droneGain.connect(nodes.filter);
+        nodes.subGain.connect(nodes.filter);
+        nodes.fifthGain.connect(nodes.filter);
+        nodes.octaveGain.connect(nodes.filter);
+        
+        nodes.filter.connect(masterGain);
+        
+        // Start all oscillators
+        nodes.drone.start();
+        nodes.sub.start();
+        nodes.fifth.start();
+        nodes.octave.start();
+        
+        // Create subtle modulation
+        nodes.lfo = audioContext.createOscillator();
+        nodes.lfo.frequency.value = 0.1; // Very slow modulation
+        nodes.lfoGain = audioContext.createGain();
+        nodes.lfoGain.gain.value = 2;
+        
+        nodes.lfo.connect(nodes.lfoGain);
+        nodes.lfoGain.connect(nodes.filter.frequency);
+        nodes.lfo.start();
+        
+        // Add subtle volume modulation for breathing effect
+        nodes.volumeLfo = audioContext.createOscillator();
+        nodes.volumeLfo.frequency.value = 0.05; // Even slower
+        nodes.volumeLfoGain = audioContext.createGain();
+        nodes.volumeLfoGain.gain.value = 0.02;
+        
+        nodes.volumeLfo.connect(nodes.volumeLfoGain);
+        nodes.volumeLfoGain.connect(masterGain.gain);
+        nodes.volumeLfo.start();
     }
     
     function visualizeAudio() {
-        if (!analyser) return;
-        
-        const dataArray = new Uint8Array(analyser.frequencyBinCount);
         const soundBars = document.querySelectorAll('.sound-bar');
+        let phase = 0;
         
         function draw() {
-            analyser.getByteFrequencyData(dataArray);
+            phase += 0.01;
             
-            // Update visualization bars
             soundBars.forEach((bar, i) => {
-                const index = Math.floor(i / soundBars.length * dataArray.length);
-                const value = dataArray[index] / 255;
-                const height = Math.max(10, value * 100);
+                const offset = i * 0.2;
+                const height = 30 + Math.sin(phase + offset) * 20 + Math.sin(phase * 2 + offset) * 10;
+                const opacity = 0.3 + Math.sin(phase + offset) * 0.2;
+                
                 bar.style.height = `${height}%`;
-                bar.style.opacity = 0.3 + value * 0.7;
+                bar.style.opacity = opacity;
             });
             
             animationFrame = requestAnimationFrame(draw);
@@ -506,43 +565,7 @@ function initializeAudioToggle() {
     }
 }
 
-// Signal Particles Background
-function initializeSignalParticles() {
-    const container = document.querySelector('.signal-particles');
-    
-    if (container) {
-        // Create initial particles
-        for (let i = 0; i < 30; i++) {
-            createParticle();
-        }
-        
-        // Continue creating particles at intervals
-        setInterval(createParticle, 2000);
-    }
-    
-    function createParticle() {
-        const particle = document.createElement('div');
-        particle.classList.add('signal-particle');
-        
-        // Random position, size, and duration
-        const size = 1 + Math.random() * 3;
-        const posX = Math.random() * 100;
-        const duration = 15 + Math.random() * 20;
-        
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${posX}vw`;
-        particle.style.animationDuration = `${duration}s`;
-        
-        // Add to container
-        container.appendChild(particle);
-        
-        // Remove after animation completes
-        setTimeout(() => {
-            container.removeChild(particle);
-        }, duration * 1000);
-    }
-}
+// Signal Particles Background (Removed - replaced with gentle stars)
 
 // Color Mood Switcher
 function initializeColorMoodSwitcher() {
@@ -553,13 +576,9 @@ function initializeColorMoodSwitcher() {
         dot.addEventListener('click', () => {
             const mood = dot.getAttribute('data-mood');
             
-            // Remove active class from all dots
             moodDots.forEach(d => d.classList.remove('active'));
-            
-            // Add active class to clicked dot
             dot.classList.add('active');
             
-            // Apply color scheme based on mood
             switch (mood) {
                 case 'default':
                     root.style.setProperty('--bg-primary', '#0a1520');
@@ -598,42 +617,17 @@ function initializeInteractiveBackground() {
     let followerX = 0;
     let followerY = 0;
     
-    // Track mouse position
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
         
-        // Show cursor follower
         if (cursorFollower) {
             cursorFollower.style.opacity = '1';
         }
-        
-        // Trigger hover effect on nearby stars
-        const stars = document.querySelectorAll('.star');
-        stars.forEach(star => {
-            const rect = star.getBoundingClientRect();
-            const starX = rect.left + rect.width / 2;
-            const starY = rect.top + rect.height / 2;
-            const distance = Math.sqrt(Math.pow(mouseX - starX, 2) + Math.pow(mouseY - starY, 2));
-            
-            // If mouse is close to star, make it glow
-            if (distance < 100) {
-                const intensity = 1 - distance / 100;
-                star.style.transform = `scale(${1 + intensity * 0.5})`;
-                star.style.opacity = Math.min(1, 0.2 + intensity * 0.8);
-                star.style.boxShadow = `0 0 ${10 * intensity}px ${5 * intensity}px rgba(251, 191, 36, ${intensity * 0.5})`;
-            } else {
-                star.style.transform = '';
-                star.style.opacity = '';
-                star.style.boxShadow = '';
-            }
-        });
     });
     
-    // Animate cursor follower
     function animateFollower() {
         if (cursorFollower) {
-            // Smooth follow with easing
             followerX += (mouseX - followerX) * 0.05;
             followerY += (mouseY - followerY) * 0.05;
             
@@ -645,40 +639,18 @@ function initializeInteractiveBackground() {
     }
     
     animateFollower();
-    
-    // Make stars occasionally follow cursor
-    const stars = document.querySelectorAll('.signal-particle');
-    
-    document.addEventListener('mousemove', (e) => {
-        // Randomly select some particles to follow cursor
-        if (Math.random() > 0.95) {
-            const randomStar = stars[Math.floor(Math.random() * stars.length)];
-            if (randomStar) {
-                randomStar.style.transition = 'transform 2s ease-out';
-                randomStar.style.transform = `translate(${e.clientX - parseInt(randomStar.style.left)}px, ${e.clientY}px)`;
-                
-                // Reset after animation
-                setTimeout(() => {
-                    randomStar.style.transition = '';
-                    randomStar.style.transform = '';
-                }, 2000);
-            }
-        }
-    });
 }
 
 // Loyalty Journey
 function initializeLoyaltyJourney() {
-    // Simply observe the nodes for visibility animation
     const journeyNodes = document.querySelectorAll('.journey-node');
     
-    if (!journeyNodes.length) return; // Exit if no journey nodes found
+    if (!journeyNodes.length) return;
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.setAttribute('data-visible', 'true');
-                // Add staggered animation delay
                 const index = entry.target.getAttribute('data-node');
                 if (index) {
                     entry.target.style.transitionDelay = `${(parseInt(index) - 1) * 0.2}s`;
@@ -702,112 +674,33 @@ function initializeConstellationBackground() {
     
     if (!constellationStars || !constellationLines) return;
     
-    // Clear existing stars and lines
     constellationStars.innerHTML = '';
     constellationLines.innerHTML = '';
     
-    // Create stars
-    const starCount = 30; // Reduced number of stars
+    // Create fewer, more subtle stars
+    const starCount = 15;
     const starPositions = [];
     
     for (let i = 0; i < starCount; i++) {
         const star = document.createElement('div');
         star.classList.add('star');
         
-        // Random position
         const x = Math.random() * 100;
         const y = Math.random() * 100;
         
         star.style.left = `${x}%`;
         star.style.top = `${y}%`;
+        star.style.width = `${1 + Math.random() * 2}px`;
+        star.style.height = star.style.width;
+        star.style.opacity = Math.random() * 0.5 + 0.3;
         
-        // Some stars are brighter
         if (Math.random() > 0.7) {
-            star.classList.add('bright');
-        }
-        
-        // Some stars twinkle
-        if (Math.random() > 0.5) {
             star.classList.add('twinkle');
             star.style.animationDelay = `${Math.random() * 4}s`;
         }
         
-        // Add subtle movement animation
-        star.style.animation = `starFloat ${20 + Math.random() * 10}s ease-in-out infinite alternate`;
-        star.style.animationDelay = `${Math.random() * 5}s`;
-        
         constellationStars.appendChild(star);
-        
-        // Store position for line creation
         starPositions.push({ x, y, element: star });
-    }
-    
-    // Create constellation lines - fewer lines
-    const lineCount = 8; // Reduced number of lines
-    
-    for (let i = 0; i < lineCount; i++) {
-        // Pick two random stars that are somewhat close to each other
-        let star1, star2;
-        let attempts = 0;
-        let validPair = false;
-        
-        while (!validPair && attempts < 20) {
-            star1 = starPositions[Math.floor(Math.random() * starPositions.length)];
-            star2 = starPositions[Math.floor(Math.random() * starPositions.length)];
-            
-            // Calculate distance between stars
-            const dx = star2.x - star1.x;
-            const dy = star2.y - star1.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            // Only connect stars that are somewhat close but not too close
-            if (distance > 10 && distance < 40 && star1 !== star2) {
-                validPair = true;
-            }
-            
-            attempts++;
-        }
-        
-        if (!validPair) continue;
-        
-        // Calculate line properties
-        const dx = star2.x - star1.x;
-        const dy = star2.y - star1.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-        
-        // Create line
-        const line = document.createElement('div');
-        line.classList.add('constellation-line');
-        line.style.width = `${distance}%`;
-        line.style.left = `${star1.x}%`;
-        line.style.top = `${star1.y}%`;
-        line.style.transform = `rotate(${angle}deg)`;
-        line.style.opacity = '0.3';
-        line.style.animation = `linePulse ${5 + Math.random() * 5}s ease-in-out infinite alternate`;
-        
-        constellationLines.appendChild(line);
-    }
-    
-    // Add floating dots
-    for (let i = 0; i < 15; i++) {
-        const dot = document.createElement('div');
-        dot.classList.add('floating-dot');
-        
-        // Random position
-        const x = Math.random() * 100;
-        const y = Math.random() * 100;
-        
-        dot.style.left = `${x}%`;
-        dot.style.top = `${y}%`;
-        dot.style.width = `${1 + Math.random() * 2}px`;
-        dot.style.height = dot.style.width;
-        
-        // Animation
-        dot.style.animation = `dotFloat ${30 + Math.random() * 20}s linear infinite`;
-        dot.style.animationDelay = `${Math.random() * 10}s`;
-        
-        constellationStars.appendChild(dot);
     }
 }
 
@@ -815,36 +708,30 @@ function initializeConstellationBackground() {
 function initializeTextHighlighting() {
     const highlightElements = document.querySelectorAll('.highlight-text');
     
-    // Create observer
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            // When element enters viewport
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
                 
-                // Remove active class after element is no longer in focus
                 setTimeout(() => {
                     if (!isElementInViewport(entry.target)) {
                         entry.target.classList.remove('active');
                     }
                 }, 2000);
             } else {
-                // When element leaves viewport
                 entry.target.classList.remove('active');
             }
         });
     }, {
         root: null,
-        rootMargin: '-10% 0px -10% 0px', // Trigger when element is 10% inside viewport
+        rootMargin: '-10% 0px -10% 0px',
         threshold: 0.1
     });
     
-    // Observe all highlight elements
     highlightElements.forEach(element => {
         observer.observe(element);
     });
     
-    // Also update on scroll for smoother transitions
     window.addEventListener('scroll', () => {
         highlightElements.forEach(element => {
             if (isElementInViewport(element, 0.5)) {
@@ -855,12 +742,10 @@ function initializeTextHighlighting() {
         });
     });
     
-    // Helper function to check if element is in viewport
     function isElementInViewport(el, threshold = 0.1) {
         const rect = el.getBoundingClientRect();
         const windowHeight = window.innerHeight || document.documentElement.clientHeight;
         
-        // Element is considered in viewport if it's at least threshold% visible
         const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
         const elementHeight = rect.bottom - rect.top;
         
@@ -868,15 +753,13 @@ function initializeTextHighlighting() {
     }
 }
 
-// Handle visibility change (pause animations when tab is not visible)
+// Handle visibility change
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-        // Pause animations
         document.querySelectorAll('[class*="animate"]').forEach(el => {
             el.style.animationPlayState = 'paused';
         });
     } else {
-        // Resume animations
         document.querySelectorAll('[class*="animate"]').forEach(el => {
             el.style.animationPlayState = 'running';
         });
@@ -903,5 +786,4 @@ document.addEventListener('keydown', (e) => {
 // Error boundary for production
 window.addEventListener('error', (e) => {
     console.error('Global error:', e.error);
-    // In production, send to error tracking service
 });

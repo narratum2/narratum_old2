@@ -126,16 +126,27 @@ function initializeAnchorMenu() {
         });
     });
     
-    // Click event for anchor links
+    // Enhanced click event for anchor links with smooth scrolling
     const anchors = anchorMenu.querySelectorAll('.anchor-link');
     anchors.forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             e.preventDefault();
             const targetSection = anchor.getAttribute('data-section');
-            const section = document.querySelector(`[data-section="${targetSection}"]`);
+            const section = document.querySelector(`#${targetSection}`);
             
             if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
+                const offset = 0; // Adjust if you have a fixed header
+                const targetPosition = section.offsetTop - offset;
+                
+                // Smooth scroll with easing
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update active state immediately
+                anchors.forEach(a => a.classList.remove('active'));
+                anchor.classList.add('active');
             }
         });
     });

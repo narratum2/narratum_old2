@@ -662,13 +662,17 @@ function initializeLoyaltyJourney() {
     // Simply observe the nodes for visibility animation
     const journeyNodes = document.querySelectorAll('.journey-node');
     
+    if (!journeyNodes.length) return; // Exit if no journey nodes found
+    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.setAttribute('data-visible', 'true');
                 // Add staggered animation delay
                 const index = entry.target.getAttribute('data-node');
-                entry.target.style.transitionDelay = `${(index - 1) * 0.2}s`;
+                if (index) {
+                    entry.target.style.transitionDelay = `${(parseInt(index) - 1) * 0.2}s`;
+                }
             }
         });
     }, {

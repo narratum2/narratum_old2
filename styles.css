@@ -1,4 +1,4 @@
-/* Narratum.io - Perfect Hybrid Styles */
+/* Narratum.io - v3 Complete Styles */
 
 :root {
     /* Color System - Dark Harbor Blue Theme */
@@ -66,7 +66,7 @@ body {
     top: 0;
 }
 
-/* Navigation Dots */
+/* Navigation Dots - Fixed */
 .nav-dots {
     position: fixed;
     right: 40px;
@@ -89,6 +89,9 @@ body {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
 }
 
 .dot-inner {
@@ -107,16 +110,13 @@ body {
 .nav-dot:focus,
 .nav-dot.active {
     border-color: var(--accent-gold);
+    transform: scale(1.2);
 }
 
 .nav-dot:hover .dot-inner,
 .nav-dot:focus .dot-inner,
 .nav-dot.active .dot-inner {
     transform: translate(-50%, -50%) scale(1);
-}
-
-.nav-dot.active {
-    border-color: var(--accent-gold);
 }
 
 /* Anchor Menu */
@@ -177,7 +177,7 @@ body {
     color: var(--accent-gold);
 }
 
-/* Audio Toggle */
+/* Audio Toggle - Fixed Alignment */
 .audio-toggle {
     position: fixed;
     bottom: 40px;
@@ -238,14 +238,15 @@ body {
     }
 }
 
-/* Color Mood Switcher */
+/* Color Mood Switcher - Fixed Alignment */
 .mood-switcher {
     position: fixed;
-    bottom: 40px;
+    bottom: 52px;
     right: 100px;
     display: flex;
     gap: 12px;
     z-index: 100;
+    align-items: center;
 }
 
 .mood-dot {
@@ -329,41 +330,9 @@ body {
     }
 }
 
-/* Signal Particles */
+/* Signal Particles - Hidden (replaced with gentle stars) */
 .signal-particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.signal-particle {
-    position: absolute;
-    background-color: var(--accent-gold);
-    border-radius: 50%;
-    opacity: 0.2;
-    animation: floatUp linear infinite;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(100vh) scale(1);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.2;
-    }
-    90% {
-        opacity: 0.1;
-    }
-    100% {
-        transform: translateY(-100px) scale(0.5);
-        opacity: 0;
-    }
+    display: none;
 }
 
 /* Gold Line Through Page */
@@ -425,22 +394,6 @@ body {
     color: var(--text-secondary);
     margin-bottom: 60px;
     text-align: center;
-}
-
-.section-arc {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    z-index: 1;
-}
-
-.section-arc.top {
-    top: 0;
-}
-
-.section-arc.bottom {
-    bottom: 0;
 }
 
 /* Hero Section */
@@ -518,18 +471,15 @@ body {
 
 .star {
     position: absolute;
-    width: 2px;
-    height: 2px;
-    background-color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     transition: all 0.5s ease;
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
 }
 
 .star.bright {
-    width: 3px;
-    height: 3px;
-    background-color: var(--accent-gold);
-    box-shadow: 0 0 10px var(--accent-gold);
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
 }
 
 .star.twinkle {
@@ -538,46 +488,12 @@ body {
 
 @keyframes twinkle {
     0%, 100% {
-        opacity: 0.2;
+        opacity: 0.3;
+        transform: scale(1);
     }
     50% {
-        opacity: 1;
-    }
-}
-
-@keyframes starFloat {
-    0% {
-        transform: translate(0, 0);
-    }
-    100% {
-        transform: translate(10px, 10px);
-    }
-}
-
-.floating-dot {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background-color: var(--accent-gold);
-    border-radius: 50%;
-    opacity: 0.6;
-}
-
-@keyframes dotFloat {
-    0% {
-        transform: translate(0, 0);
-    }
-    25% {
-        transform: translate(20px, 10px);
-    }
-    50% {
-        transform: translate(0, 20px);
-    }
-    75% {
-        transform: translate(-20px, 10px);
-    }
-    100% {
-        transform: translate(0, 0);
+        opacity: 0.8;
+        transform: scale(1.2);
     }
 }
 
@@ -830,7 +746,7 @@ body {
     color: var(--text-primary);
 }
 
-/* Symbol Content - Enhanced for Magic and Visibility */
+/* Symbol Content */
 .symbol-content {
     position: absolute;
     top: 120%;
@@ -871,7 +787,6 @@ body {
     color: var(--text-secondary);
 }
 
-/* Add magical particles inside the content */
 .symbol-content::before {
     content: '';
     position: absolute;
@@ -989,6 +904,7 @@ body {
     height: 1px;
     background-color: var(--accent-gold);
 }
+
 /* Loyalty Systems Section */
 .loyalty {
     background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
@@ -1097,7 +1013,6 @@ body {
     line-height: 1.8;
 }
 
-/* Add connecting line animation */
 .journey-node::before {
     content: '';
     position: absolute;
@@ -1117,6 +1032,7 @@ body {
 .journey-node[data-visible="true"]::before {
     opacity: 0.3;
 }
+
 /* Partnerships Section */
 .partnerships {
     background: var(--bg-primary);
@@ -1214,7 +1130,7 @@ body {
     font-style: normal;
 }
 
-/* Contact Section - Apeiron Style */
+/* Contact Section */
 .contact {
     background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
 }
@@ -1303,7 +1219,7 @@ body {
     background: rgba(251, 191, 36, 0.1);
 }
 
-/* Footer - Updated Style */
+/* Footer */
 .footer {
     padding: 60px 24px 40px;
     background: var(--bg-secondary);
@@ -1639,67 +1555,7 @@ body {
     background: var(--accent-warm);
 }
 
-/* Lazy Loading Styles */
-.lazy-element {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s var(--transition-smooth);
-}
-
-.lazy-element.loaded {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Enhanced lazy loading for capability blocks */
-.capability-block.lazy-element {
-    opacity: 0;
-    transform: translateY(40px);
-}
-
-.capability-block.lazy-element.loaded {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Staggered animations for grid items */
-.symbol-item.lazy-element {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-}
-
-.symbol-item.lazy-element.loaded {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-/* Journey nodes lazy loading */
-.journey-node.lazy-element {
-    opacity: 0;
-    transform: translateX(-30px);
-}
-
-.journey-node:nth-child(even).lazy-element {
-    transform: translateX(30px);
-}
-
-.journey-node.lazy-element.loaded {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Partnership cards lazy loading */
-.partnership-category.lazy-element {
-    opacity: 0;
-    transform: translateY(30px) scale(0.98);
-}
-
-.partnership-category.lazy-element.loaded {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-/* Sound Visualization */
+/* Sound Visualization - Enhanced */
 .sound-visualization {
     position: fixed;
     bottom: 100px;
@@ -1719,11 +1575,12 @@ body {
 .sound-bar {
     position: absolute;
     bottom: 0;
-    background: var(--accent-gold);
+    background: linear-gradient(to top, var(--accent-gold), transparent);
     width: 4px;
     border-radius: 2px;
     transform-origin: bottom;
-    opacity: 0.7;
+    opacity: 0.5;
+    transition: all 0.8s ease;
 }
 
 /* Magical Particles */
@@ -1742,4 +1599,183 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.cursor-follower {
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.1), transparent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+/* Highlight Text Animation */
+.highlight-text {
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.highlight-text.active {
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(251, 191, 36, 0.08) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: gentleHighlight 3s ease-in-out;
+}
+
+@keyframes gentleHighlight {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Form Success Message */
+.form-success {
+    text-align: center;
+    padding: 40px;
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    color: var(--accent-gold);
+}
+
+.form-success h3 {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    margin-bottom: 16px;
+    color: var(--accent-gold);
+}
+
+.form-success p {
+    color: var(--text-secondary);
+    font-size: 18px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .partnerships-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .symbol-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+    
+    .capabilities-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-top {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-padding: 80px;
+    }
+    
+    .audio-toggle {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .mood-switcher {
+        bottom: 30px;
+        right: 70px;
+        gap: 8px;
+    }
+    
+    .mood-dot {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .nav-dots {
+        right: 20px;
+        gap: 16px;
+    }
+    
+    .nav-dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .site-title {
+        font-size: 64px;
+    }
+    
+    .section-title {
+        font-size: 36px;
+    }
+    
+    .symbol-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .partnerships-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .journey-node {
+        padding-left: 60px;
+    }
+    
+    .node-content {
+        padding: 24px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .anchor-menu {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-title {
+        font-size: 48px;
+    }
+    
+    .site-tagline {
+        font-size: 18px;
+    }
+    
+    .prose p {
+        font-size: 18px;
+    }
+    
+    .prose .lead {
+        font-size: 24px;
+    }
+}

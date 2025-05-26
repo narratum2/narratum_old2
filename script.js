@@ -712,7 +712,6 @@ function initializeLoyaltyJourney() {
                 observer.observe(node);
             }
         }
-    });
 }
 
 // Constellation Background for Hero Section

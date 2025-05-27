@@ -3,26 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>narratum | Strategic infrastructure for transformative hospitality</title>
-    <meta name="description" content="Strategic infrastructure for transformative hospitality. We build systems that transform how organizations connect with their communities.">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://narratum.io/">
-    <meta property="og:title" content="narratum | Strategic infrastructure for transformative hospitality">
-    <meta property="og:description" content="Strategic infrastructure for transformative hospitality. We build systems that transform how organizations connect with their communities.">
-    <meta property="og:image" content="https://narratum.io/assets/og-image.jpg">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://narratum.io/">
-    <meta property="twitter:title" content="narratum | Strategic infrastructure for transformative hospitality">
-    <meta property="twitter:description" content="Strategic infrastructure for transformative hospitality. We build systems that transform how organizations connect with their communities.">
-    <meta property="twitter:image" content="https://narratum.io/assets/twitter-image.jpg">
+    <title>Thank You | narratum</title>
+    <meta name="description" content="Thank you for connecting with Narratum. We'll be in touch soon.">
     
     <!-- Favicon -->
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,617 +16,179 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Thank You Page Specific Styles */
+        .thank-you-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 24px;
+        }
+        
+        .thank-you-content {
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .thank-you-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        
+        .thank-you-icon svg {
+            width: 100%;
+            height: 100%;
+            color: var(--accent-gold);
+        }
+        
+        .thank-you-title {
+            font-family: var(--font-serif);
+            font-size: 56px;
+            font-weight: 300;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+        
+        .thank-you-message {
+            font-size: 20px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+        }
+        
+        .back-home {
+            display: inline-block;
+            padding: 16px 48px;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-family: var(--font-sans);
+            font-size: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .back-home:hover::before {
+            left: 100%;
+        }
+        
+        .back-home:hover {
+            background: rgba(251, 191, 36, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(251, 191, 36, 0.2);
+        }
+        
+        /* Animated checkmark */
+        .checkmark {
+            stroke: var(--accent-gold);
+            stroke-width: 2;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: drawCheck 1s ease 0.5s forwards;
+        }
+        
+        .check-circle {
+            stroke: var(--accent-gold);
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 320;
+            stroke-dashoffset: 320;
+            animation: drawCircle 1s ease forwards;
+        }
+        
+        @keyframes drawCircle {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Background stars effect */
+        .thank-you-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(251, 191, 36, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(125, 211, 252, 0.2), transparent),
+                radial-gradient(1px 1px at 80% 20%, rgba(251, 191, 36, 0.2), transparent),
+                radial-gradient(1px 1px at 40% 80%, rgba(125, 211, 252, 0.3), transparent);
+            background-size: 300% 300%;
+            animation: sparkleMove 40s linear infinite;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
-    <!-- Accessibility Skip Link -->
-    <a href="#main" class="skip-link">Skip to content</a>
-    
-    <!-- Mouse Glow Effect -->
-    <div class="mouse-glow"></div>
-    
-    <!-- Loading Screen -->
-    <div class="loading-screen">
-        <div class="loader">
-            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283" class="loader-circle" />
-                <path d="M50 25V75" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                <path d="M25 50H75" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-            </svg>
-            <span>narratum</span>
-        </div>
-    </div>
-    
-    <!-- Navigation Dots -->
-    <nav class="nav-dots" aria-label="Section navigation">
-        <button class="nav-dot active" data-section="hero" aria-label="Hero section">
-            <span class="dot-inner"></span>
-        </button>
-        <button class="nav-dot" data-section="infrastructure" aria-label="Infrastructure section">
-            <span class="dot-inner"></span>
-        </button>
-        <button class="nav-dot" data-section="what-we-build" aria-label="What We Build section">
-            <span class="dot-inner"></span>
-        </button>
-        <button class="nav-dot" data-section="approach" aria-label="Approach section">
-            <span class="dot-inner"></span>
-        </button>
-        <button class="nav-dot" data-section="capabilities" aria-label="Capabilities section">
-            <span class="dot-inner"></span>
-        </button>
-        <button class="nav-dot" data-section="loyalty" aria-label="Loyalty section">
-            <span class="dot-inner"></span>
-        </button>
-        <button class="nav-dot" data-section="partnerships" aria-label="Partnerships section">
-            <span class="dot-inner"></span>
-        </button>
-        <button class="nav-dot" data-section="contact" aria-label="Contact section">
-            <span class="dot-inner"></span>
-        </button>
-    </nav>
-    
-    <!-- Anchor Menu -->
-    <nav class="anchor-menu" aria-label="Section links">
-        <a href="#hero" class="anchor-link active" data-section="hero">Home</a>
-        <a href="#infrastructure" class="anchor-link" data-section="infrastructure">Infrastructure</a>
-        <a href="#what-we-build" class="anchor-link" data-section="what-we-build">What We Build</a>
-        <a href="#approach" class="anchor-link" data-section="approach">Approach</a>
-        <a href="#capabilities" class="anchor-link" data-section="capabilities">Capabilities</a>
-        <a href="#loyalty" class="anchor-link" data-section="loyalty">Loyalty</a>
-        <a href="#partnerships" class="anchor-link" data-section="partnerships">Partnerships</a>
-        <a href="#contact" class="anchor-link" data-section="contact">Connect</a>
-    </nav>
-    
-    <!-- Audio Toggle -->
-    <button class="audio-toggle" data-state="inactive" aria-label="Toggle ambient sound">
-        <svg class="audio-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z" stroke="currentColor" stroke-width="1.5" />
-            <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5" stroke-dasharray="1 3" />
-            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5" stroke-dasharray="1 2" />
-        </svg>
-    </button>
-    
-    <!-- Color Mood Switcher -->
-    <div class="mood-switcher">
-        <button class="mood-dot active" data-mood="default" aria-label="Default color theme"></button>
-        <button class="mood-dot" data-mood="teal" aria-label="Teal color theme"></button>
-        <button class="mood-dot" data-mood="purple" aria-label="Purple color theme"></button>
-        <button class="mood-dot" data-mood="gold" aria-label="Gold color theme"></button>
-    </div>
-    
-    <!-- Sound Visualization -->
-    <div class="sound-visualization">
-        <div class="sound-bar" style="left: 0%; height: 20%;"></div>
-        <div class="sound-bar" style="left: 20%; height: 40%;"></div>
-        <div class="sound-bar" style="left: 40%; height: 60%;"></div>
-        <div class="sound-bar" style="left: 60%; height: 40%;"></div>
-        <div class="sound-bar" style="left: 80%; height: 20%;"></div>
-    </div>
-    
-    <!-- Signal Particles -->
-    <div class="signal-particles"></div>
-    
-    <!-- Gold Line -->
-    <div class="gold-line"></div>
-    
-    <!-- Interactive Background -->
-    <div class="interactive-background">
-        <div class="cursor-follower"></div>
-    </div>
-    
-    <!-- Main Content -->
-    <main id="main">
-        <!-- Hero Section -->
-        <section id="hero" class="section hero" data-section="hero">
-            <div class="constellation-background">
-                <div class="orbital-rings">
-                    <div class="orbital-ring ring-1"></div>
-                    <div class="orbital-ring ring-2"></div>
-                    <div class="orbital-ring ring-3"></div>
-                </div>
-                <div class="constellation-stars"></div>
-                <div class="constellation-lines"></div>
-                <div class="geometric-shapes">
-                    <div class="geo-shape diamond"></div>
-                    <div class="geo-shape square"></div>
-                    <div class="geo-shape triangle"></div>
-                </div>
+    <!-- Thank You Section -->
+    <section class="thank-you-section">
+        <div class="thank-you-content">
+            <div class="thank-you-icon">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="48" class="check-circle"/>
+                    <path d="M30 50 L45 65 L70 35" class="checkmark" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </div>
             
-            <div class="content-container">
-                <h1 class="site-title">NARRATUM</h1>
-                <p class="site-tagline">Strategic infrastructure for transformative hospitality.</p>
-            </div>
+            <h1 class="thank-you-title">Thank You</h1>
             
-            <div class="scroll-indicator">
-                <div class="scroll-line">
-                    <div class="scroll-drop"></div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Infrastructure Section -->
-        <section id="infrastructure" class="section infrastructure" data-section="infrastructure">
-            <div class="content-container">
-                <h2 class="section-title">Infrastructure, Not Service</h2>
-                <div class="prose">
-                    <p class="lead highlight-text">We build systems that transform how organizations connect with their communities.</p>
-                    <p class="highlight-text">In an era where every institution seeks differentiation, we recognize that true distinction comes not from surface-level service improvements, but from fundamental infrastructure transformation.</p>
-                    <p class="highlight-text">Every touchpoint is an opportunity. Every interaction, a potential catalyst. We design the underlying frameworks that turn moments into movements, visitors into advocates, and spaces into sanctuaries.</p>
-                    <p class="highlight-text">From arrival experiences that set emotional tone to digital ecosystems that extend engagement beyond physical boundaries, we architect the invisible systems that shape how people feel, connect, and remember.</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- What We Build Section -->
-        <section id="what-we-build" class="section what-we-build" data-section="what-we-build">
-            <div class="content-container">
-                <h2 class="section-title">What We Build</h2>
-                
-                <div class="build-pillars">
-                    <div class="build-pillar">
-                        <div class="pillar-icon">
-                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-                                <circle cx="24" cy="24" r="12" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
-                                <circle cx="24" cy="24" r="4" fill="currentColor"/>
-                            </svg>
-                        </div>
-                        <h3>Experiential Systems</h3>
-                        <p>Frameworks for sensory and emotional engagement across physical and digital touchpoints.</p>
-                    </div>
-                    
-                    <div class="build-pillar">
-                        <div class="pillar-icon">
-                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="8" y="8" width="32" height="32" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <rect x="16" y="16" width="16" height="16" stroke="currentColor" stroke-width="1.5" opacity="0.5" fill="none"/>
-                                <rect x="22" y="22" width="4" height="4" fill="currentColor"/>
-                            </svg>
-                        </div>
-                        <h3>Cultural Infrastructure</h3>
-                        <p>Structures and programs that embed meaning, identity, and community into environments.</p>
-                    </div>
-                    
-                    <div class="build-pillar">
-                        <div class="pillar-icon">
-                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M24 4L40 14V34L24 44L8 34V14L24 4Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <path d="M24 24L32 19V29L24 34L16 29V19L24 24Z" stroke="currentColor" stroke-width="1.5" opacity="0.5" fill="none"/>
-                                <circle cx="24" cy="24" r="2" fill="currentColor"/>
-                            </svg>
-                        </div>
-                        <h3>Technology & Intelligence</h3>
-                        <p>Seamless integration of data, automation, and adaptive systems to scale human experiences.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Approach Section -->
-        <section id="approach" class="section approach" data-section="approach">
-            <div class="content-container">
-                <h2 class="section-title">Strategic Frequencies</h2>
-                <p class="intro-text highlight-text">We operate at the intersection of strategy and soul. Click each frequency to explore.</p>
-                
-                <div class="symbol-grid">
-                    <!-- Symbol 1: Strategy -->
-                    <div class="symbol-item lazy-load" data-symbol="strategy">
-                        <div class="symbol-glyph">
-                            <svg class="glyph-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle class="outer-ring" cx="60" cy="60" r="59" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-                                <circle class="inner-ring" cx="60" cy="60" r="40" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
-                                <path class="symbol-icon" d="M40 40L80 80M80 40L40 80" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" />
-                            </svg>
-                        </div>
-                        <span class="symbol-label">Strategy</span>
-                        
-                        <div class="symbol-content">
-                            <h3>Strategic Vision</h3>
-                            <p>We align organizational purpose with transformative hospitality experiences, creating lasting impact through systematic innovation.</p>
-                            <p>Our strategic approach integrates cultural insights with operational excellence to build sustainable competitive advantages.</p>
-                            <ul>
-                                <li>Purpose-driven experience design</li>
-                                <li>Long-term value creation</li>
-                                <li>Stakeholder alignment</li>
-                                <li>Innovation frameworks</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Symbol 2: Systems -->
-                    <div class="symbol-item lazy-load" data-symbol="systems">
-                        <div class="symbol-glyph">
-                            <svg class="glyph-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle class="outer-ring" cx="60" cy="60" r="59" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-                                <circle class="inner-ring" cx="60" cy="60" r="40" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
-                                <rect class="symbol-icon" x="40" y="40" width="40" height="40" stroke="#FBBF24" stroke-width="2" fill="none" />
-                            </svg>
-                        </div>
-                        <span class="symbol-label">Systems</span>
-                        
-                        <div class="symbol-content">
-                            <h3>Systems Thinking</h3>
-                            <p>Designing holistic frameworks that connect all touchpoints into a coherent, meaningful journey that resonates at every level.</p>
-                            <p>We view hospitality as an interconnected ecosystem where each element reinforces and amplifies the whole experience.</p>
-                            <ul>
-                                <li>Cross-functional integration</li>
-                                <li>Feedback loop optimization</li>
-                                <li>Scalable process design</li>
-                                <li>Performance metrics alignment</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Symbol 3: Experience -->
-                    <div class="symbol-item lazy-load" data-symbol="experience">
-                        <div class="symbol-glyph">
-                            <svg class="glyph-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle class="outer-ring" cx="60" cy="60" r="59" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-                                <circle class="inner-ring" cx="60" cy="60" r="40" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
-                                <circle class="symbol-icon" cx="60" cy="60" r="25" stroke="#FBBF24" stroke-width="2" />
-                            </svg>
-                        </div>
-                        <span class="symbol-label">Experience</span>
-                        
-                        <div class="symbol-content">
-                            <h3>Emotional Architecture</h3>
-                            <p>Crafting sensory environments that evoke specific emotional responses, creating memorable moments that transcend service.</p>
-                            <p>Every space, interaction, and touchpoint is deliberately designed to create lasting emotional connections.</p>
-                            <ul>
-                                <li>Sensory journey mapping</li>
-                                <li>Atmospheric design principles</li>
-                                <li>Behavioral psychology integration</li>
-                                <li>Memory creation techniques</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Symbol 4: Legacy -->
-                    <div class="symbol-item lazy-load" data-symbol="legacy">
-                        <div class="symbol-glyph">
-                            <svg class="glyph-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle class="outer-ring" cx="60" cy="60" r="59" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-                                <circle class="inner-ring" cx="60" cy="60" r="40" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
-                                <path class="symbol-icon" d="M60 35 L80 65 L40 65 Z" stroke="#FBBF24" stroke-width="2" fill="none" />
-                            </svg>
-                        </div>
-                        <span class="symbol-label">Legacy</span>
-                        
-                        <div class="symbol-content">
-                            <h3>Cultural Resonance</h3>
-                            <p>Building lasting connections between institutions and communities through authentic engagement and shared values.</p>
-                            <p>We help organizations become cultural anchors that reflect and shape the communities they serve.</p>
-                            <ul>
-                                <li>Community co-creation</li>
-                                <li>Cultural narrative development</li>
-                                <li>Values-based programming</li>
-                                <li>Legacy building strategies</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Capabilities Section -->
-        <section id="capabilities" class="section capabilities" data-section="capabilities">
-            <div class="content-container">
-                <h2 class="section-title">Core Capabilities</h2>
-                <p class="section-subtitle highlight-text">Transforming institutions through integrated expertise.</p>
-                
-                <div class="capabilities-grid">
-                    <!-- Capability 1 -->
-                    <div class="capability-block lazy-load" data-index="1">
-                        <span class="capability-number">01</span>
-                        <h3>Experience Strategy</h3>
-                        <ul>
-                            <li>Hospitality vision development</li>
-                            <li>Journey mapping and touchpoint design</li>
-                            <li>Service blueprint creation</li>
-                            <li>Cultural alignment assessment</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Capability 2 -->
-                    <div class="capability-block lazy-load" data-index="2">
-                        <span class="capability-number">02</span>
-                        <h3>Spatial Design</h3>
-                        <ul>
-                            <li>Arrival sequence optimization</li>
-                            <li>Wayfinding and navigation systems</li>
-                            <li>Environmental psychology application</li>
-                            <li>Sensory environment design</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Capability 3 -->
-                    <div class="capability-block lazy-load" data-index="3">
-                        <span class="capability-number">03</span>
-                        <h3>Digital Ecosystems</h3>
-                        <ul>
-                            <li>Integrated platform development</li>
-                            <li>Data-driven personalization</li>
-                            <li>Community engagement tools</li>
-                            <li>Digital-physical connection points</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Capability 4 -->
-                    <div class="capability-block lazy-load" data-index="4">
-                        <span class="capability-number">04</span>
-                        <h3>Organizational Transformation</h3>
-                        <ul>
-                            <li>Culture development programs</li>
-                            <li>Staff training and enablement</li>
-                            <li>Operational systems design</li>
-                            <li>Measurement framework creation</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Loyalty Systems Section -->
-        <section id="loyalty" class="section loyalty" data-section="loyalty">
-            <div class="content-container">
-                <h2 class="section-title">Loyalty Systems</h2>
-                <p class="section-subtitle highlight-text">Creating environments that inspire return and advocacy.</p>
-                
-                <div class="loyalty-journey">
-                    <div class="journey-path">
-                        <div class="journey-line"></div>
-                        
-                        <!-- Node 1 -->
-                        <div class="journey-node" data-node="1">
-                            <div class="node-dot"></div>
-                            <div class="node-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="4" y="4" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" />
-                                    <path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" />
-                                </svg>
-                            </div>
-                            <div class="node-content">
-                                <h3>Experience Architecture</h3>
-                                <p>We design comprehensive experience frameworks that anticipate needs, exceed expectations, and create emotional connections that endure beyond the visit.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Node 2 -->
-                        <div class="journey-node" data-node="2">
-                            <div class="node-dot"></div>
-                            <div class="node-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
-                                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" />
-                                </svg>
-                            </div>
-                            <div class="node-content">
-                                <h3>Cultural Programming</h3>
-                                <p>Our cultural initiatives transform spaces into dynamic environments where every interaction reinforces institutional values and community connection.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Node 3 -->
-                        <div class="journey-node" data-node="3">
-                            <div class="node-dot"></div>
-                            <div class="node-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 8L12 4L20 8V16L12 20L4 16V8Z" stroke="currentColor" stroke-width="2" />
-                                </svg>
-                            </div>
-                            <div class="node-content">
-                                <h3>Digital Integration</h3>
-                                <p>We seamlessly blend physical and digital touchpoints, creating omnichannel experiences that extend relationships beyond traditional boundaries.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Node 4 -->
-                        <div class="journey-node" data-node="4">
-                            <div class="node-dot"></div>
-                            <div class="node-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 2L22 12L12 22L2 12L12 2Z" stroke="currentColor" stroke-width="2" />
-                                </svg>
-                            </div>
-                            <div class="node-content">
-                                <h3>Community Cultivation</h3>
-                                <p>Our systems foster authentic communities where members become advocates, creating organic growth through genuine connection and shared purpose.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Loyalty closing statement with gold line -->
-                <div class="loyalty-statement">
-                    <p>From cultural institutions seeking deeper <span class="highlight-word">patron relationships</span> to corporate environments building internal culture, our loyalty systems become the invisible infrastructure that turns visitors into <span class="highlight-word">members</span>, customers into <span class="highlight-word">advocates</span>, and employees into <span class="highlight-word">ambassadors</span>.</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Partnerships Section -->
-        <section id="partnerships" class="section partnerships" data-section="partnerships">
-            <div class="content-container">
-                <h2 class="section-title">Trusted Partnerships</h2>
-                <p class="section-subtitle highlight-text">Transforming institutions across sectors.</p>
-                
-                <div class="partnerships-grid">
-                    <!-- Educational Excellence -->
-                    <div class="partnership-category">
-                        <h3>Educational Excellence</h3>
-                        <p>Leading universities and educational institutions reimagining campus experiences and digital <span class="highlight-word">engagement</span>.</p>
-                        <div class="partnership-stats">
-                            <div class="stat">
-                                <span class="stat-number">12</span>
-                                <span class="stat-label">Institutions</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number">500K+</span>
-                                <span class="stat-label">Lives Touched</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Cultural Venues -->
-                    <div class="partnership-category">
-                        <h3>Cultural Venues</h3>
-                        <p>Museums, galleries, and performance spaces creating deeper audience connections.</p>
-                        <div class="partnership-stats">
-                            <div class="stat">
-                                <span class="stat-number">8</span>
-                                <span class="stat-label">Major Venues</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number">2M+</span>
-                                <span class="stat-label">Annual Visitors</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Corporate Campuses -->
-                    <div class="partnership-category">
-                        <h3>Corporate Campuses</h3>
-                        <p>Fortune 500 companies transforming workplace culture and employee experience.</p>
-                        <div class="partnership-stats">
-                            <div class="stat">
-                                <span class="stat-number">15</span>
-                                <span class="stat-label">Enterprises</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number">100K+</span>
-                                <span class="stat-label">Employees</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Hospitality Leaders -->
-                    <div class="partnership-category">
-                        <h3>Hospitality Leaders</h3>
-                        <p>Premier hotels and resorts elevating guest experiences through integrated infrastructure design.</p>
-                        <div class="partnership-stats">
-                            <div class="stat">
-                                <span class="stat-number">600+</span>
-                                <span class="stat-label">Hotels</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number">4</span>
-                                <span class="stat-label">Campuses</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-quote">
-                    <blockquote>
-                        "Narratum didn't just improve our operations—they fundamentally transformed how we think about <span class="highlight-word">hospitality</span>. Their infrastructure approach created systems that continuously evolve with our guests' needs."
-                    </blockquote>
-                    <cite>— Chief Experience Officer, International Hospitality Group</cite>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Contact Section -->
-        <section id="contact" class="section contact" data-section="contact">
-            <div class="content-container">
-                <h2 class="section-title">Connect</h2>
-                
-                <div class="contact-wrapper">
-                    <div class="contact-info">
-                        <p class="highlight-text">Ready to transform your institution's infrastructure? Let's explore how strategic hospitality can elevate your mission.</p>
-                        <div class="contact-email">
-                            <a href="mailto:connect@narratum.io">connect@narratum.io</a>
-                        </div>
-                    </div>
-                    
-                    <form id="contactForm" class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" class="form-input" id="name" name="name" placeholder="Name" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-input" id="email" name="email" placeholder="Email" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-input" id="organization" name="organization" placeholder="Organization">
-                        </div>
-                        <div class="form-group">
-                            <div class="form-dropdown" id="sectorDropdown">
-                                <select class="dropdown-select" id="sector" name="sector" required>
-                                    <option value="" disabled selected>Select your sector</option>
-                                </select>
-                                <div class="dropdown-arrow">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <div class="dropdown-options">
-                                    <div class="dropdown-option" data-value="education">Education</div>
-                                    <div class="dropdown-option" data-value="cultural">Cultural Institution</div>
-                                    <div class="dropdown-option" data-value="corporate">Corporate</div>
-                                    <div class="dropdown-option" data-value="hospitality">Hospitality</div>
-                                    <div class="dropdown-option" data-value="other">Other</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-textarea" id="message" name="message" placeholder="Message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-button">Begin Transformation</button>
-                    </form>
-                    
-                    <!-- Founder statement as floating paragraph -->
-                    <div class="founder-statement">
-                        <p><strong>NARRATUM</strong> was founded by Pascal Frey, a strategist working at the intersection of hospitality, design, and technology. With a background in curating elevated guest experiences and building cultural ecosystems, Pascal created Narratum to help future-facing organizations craft infrastructure that is both human-centered and transformative.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-left">
-                <div class="footer-brand">NARRATUM</div>
-                <div class="footer-location">New York City</div>
-            </div>
+            <p class="thank-you-message">
+                Your message has been received. We appreciate your interest in transforming your institution's hospitality infrastructure. 
+                Our team will review your inquiry and respond within 24 hours.
+            </p>
             
-            <div class="footer-center">
-                <a href="mailto:connect@narratum.io" class="footer-email">connect@narratum.io</a>
-            </div>
-            
-            <div class="footer-right">
-                <div class="footer-links">
-                    <a href="#" class="footer-link" onclick="openLegalModal('privacy')">Privacy</a>
-                    <a href="#" class="footer-link" onclick="openLegalModal('terms')">Terms</a>
-                    <a href="#" class="footer-link" onclick="openLegalModal('cookies')">Cookies</a>
-                </div>
-                <div class="footer-copyright">© 2025 Narratum LLC</div>
-            </div>
+            <a href="/" class="back-home">Return Home</a>
         </div>
-    </footer>
+    </section>
     
-    <!-- Cookie Consent Banner -->
-    <div id="cookieBanner" class="cookie-banner">
-        <div class="cookie-content">
-            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
-            <div class="cookie-actions">
-                <button class="cookie-button accept" onclick="acceptCookies()">Accept</button>
-                <button class="cookie-button settings" onclick="openLegalModal('cookies')">Cookie Settings</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Legal Modal -->
-    <div id="legalModal" class="legal-modal">
-        <div class="legal-modal-content">
-            <button class="close-modal" onclick="closeLegalModal()">&times;</button>
-            <div id="modalContent" class="modal-body"></div>
-        </div>
-    </div>
-    
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    <script src="legal-content.js"></script>
+    <!-- Simple Script for Redirect -->
+    <script>
+        // Optional: Auto-redirect after 10 seconds
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 10000);
+    </script>
 </body>
 </html>
